@@ -1,0 +1,5 @@
+lex.yy.c
+*.exe
+*.o
+token_output.txt
+*_synth.v
