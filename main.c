@@ -5,7 +5,6 @@
 #include "parser.h"
 #include "ast.h"
 #include "token_reader.h"
-#include "rtl.h"
 
 void print_indent(int indent) {
     for (int i = 0; i < indent; i++) printf("  ");
@@ -81,7 +80,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // æ­¥éª¤ 1ï¼šè°ƒç”¨é™ˆåŠŸçš„ verilog_lexer.exe ç”Ÿæˆ token_output.txt
+    // ²½Öè 1£ºµ÷ÓÃverilog_lexer.exe Éú³É token_output.txt
     char cmd[512];
     sprintf(cmd, "verilog_lexer.exe %s", argv[1]);
     int ret = system(cmd);
@@ -90,7 +89,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // æ­¥éª¤ 2ï¼šè¯»å– token_output.txt
+    // ²½Öè 2£º¶ÁÈ¡ token_output.txt
     int count;
     Token* tokens = read_tokens_from_file("token_output.txt", &count);
     if (!tokens) {
@@ -100,26 +99,11 @@ int main(int argc, char** argv) {
 
     printf("Tokens received: %d\n", count);
 
-    // æ­¥éª¤ 3ï¼šè§£æ
+    // ²½Öè 3£º½âÎö
     Module* ast = parse(tokens, count);
     free(tokens);
 
     print_ast(ast);
-    
-    // æ­¥éª¤ 4ï¼šAST -> RTL ç½‘è¡¨
-    printf("\n=== Phase 3: RTL Synthesis ===\n");
-    RTLNetlist* netlist = ast_to_rtl(ast);
-    
-    if (netlist) {
-        print_rtl_netlist(netlist);
-        
-        // è¾“å‡º Verilog ç½‘è¡¨
-        char output_file[256];
-        sprintf(output_file, "%s_synth.v", ast->name);
-        write_verilog_netlist(netlist, output_file);
-        
-        free_rtl_netlist(netlist);
-    }
     free_module(ast);
 
     return 0;

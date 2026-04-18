@@ -53,9 +53,9 @@ Token* read_tokens_from_file(const char* filename, int* out_count) {
         char type_str[32];
         char text[256];
 
-        // 鏍煎紡: [Line 1  ] TYPE=MODULE             TEXT=module
+        // 格式: [Line 1  ] TYPE=MODULE             TEXT=module
         if (sscanf(line, "[Line %d ] TYPE=%s TEXT=%s", &line_num, type_str, text) != 3) {
-            // 灏濊瘯鏇村鏉剧殑鏍煎紡
+            // 尝试更宽松的格式
             if (sscanf(line, "[Line %d ] %*[ ]TYPE=%s %*[ ]TEXT=%s", &line_num, type_str, text) != 3) {
                 fprintf(stderr, "Warning: Skipping malformed line: %s", line);
                 continue;
@@ -79,7 +79,7 @@ Token* read_tokens_from_file(const char* filename, int* out_count) {
 
     fclose(f);
 
-    // 娣诲姞 EOF Token
+    // 添加 EOF Token
     if (count >= capacity) {
         capacity++;
         tokens = (Token*)realloc(tokens, capacity * sizeof(Token));

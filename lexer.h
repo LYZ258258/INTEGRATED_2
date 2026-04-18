@@ -12,7 +12,7 @@ typedef enum {
     T_LPAREN, T_RPAREN,
     T_LBRACE, T_RBRACE,
     T_COMMA, T_SEMICOLON, T_DOT,
-    T_EOF    // ä¾¿äº Parser åˆ¤æ–­ç»“æŸ
+    T_EOF    // ±ãÓÚ Parser ÅĞ¶Ï½áÊø
 } TokenType;
 
 typedef struct Token {

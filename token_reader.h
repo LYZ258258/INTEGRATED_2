@@ -5,10 +5,10 @@
 #include "lexer.h"
 
 /**
- * ä» token_output.txt æ–‡ä»¶ä¸­è¯»å– Token åºåˆ—ã€‚
- * @param filename token æ–‡ä»¶åï¼ˆé€šå¸¸ä¸º "token_output.txt"ï¼‰
- * @param out_count è¾“å‡ºå‚æ•°ï¼Œè¿”å› Token æ•°é‡
- * @return åŠ¨æ€åˆ†é…çš„ Token æ•°ç»„ï¼Œéœ€è°ƒç”¨ free é‡Šæ”¾
+ * ´Ó token_output.txt ÎÄ¼şÖĞ¶ÁÈ¡ Token ĞòÁĞ¡£
+ * @param filename token ÎÄ¼şÃû£¨Í¨³£Îª "token_output.txt"£©
+ * @param out_count Êä³ö²ÎÊı£¬·µ»Ø Token ÊıÁ¿
+ * @return ¶¯Ì¬·ÖÅäµÄ Token Êı×é£¬Ğèµ÷ÓÃ free ÊÍ·Å
  */
 Token* read_tokens_from_file(const char* filename, int* out_count);
 

@@ -4,12 +4,12 @@
 
 #include <stddef.h>
 
-/* --------------------- è¡¨è¾¾å¼èŠ‚ç‚¹ --------------------- */
+/* --------------------- ±í´ïÊ½½Úµã --------------------- */
 typedef enum {
-    EXPR_ID,         // å˜é‡å
-    EXPR_NUMBER,     // æ•°å­—å¸¸é‡
-    EXPR_BINARY_OP,  // åŒç›®è¿ç®—ï¼Œå¦‚ a & b
-    EXPR_UNARY_OP    // å•ç›®è¿ç®—ï¼ˆé¢„ç•™ï¼‰
+    EXPR_ID,         // ±äÁ¿Ãû
+    EXPR_NUMBER,     // Êı×Ö³£Á¿
+    EXPR_BINARY_OP,  // Ë«Ä¿ÔËËã£¬Èç a & b
+    EXPR_UNARY_OP    // µ¥Ä¿ÔËËã£¨Ô¤Áô£©
 } ExprType;
 
 typedef struct Expr {
@@ -18,26 +18,26 @@ typedef struct Expr {
         char id_name[64];               // EXPR_ID
         int number;                     // EXPR_NUMBER
         struct {
-            int op;                     // TokenTypeï¼Œå¦‚ T_AND, T_OR
+            int op;                     // TokenType£¬Èç T_AND, T_OR
             struct Expr* left;
             struct Expr* right;
         } binop;
         struct {
-            int op;                     // TokenTypeï¼Œå¦‚ '!', '~'
+            int op;                     // TokenType£¬Èç '!', '~'
             struct Expr* operand;
         } unop;
     };
-    int line;           // æºæ–‡ä»¶è¡Œå·ï¼Œç”¨äºæŠ¥é”™
+    int line;           // Ô´ÎÄ¼şĞĞºÅ£¬ÓÃÓÚ±¨´í
 } Expr;
 
-/* --------------------- ç«¯å£æ–¹å‘ --------------------- */
+/* --------------------- ¶Ë¿Ú·½Ïò --------------------- */
 typedef enum {
     PORT_INPUT,
     PORT_OUTPUT,
-    PORT_INOUT   // é¢„ç•™
+    PORT_INOUT   // Ô¤Áô
 } PortDir;
 
-/* --------------------- ç«¯å£èŠ‚ç‚¹ï¼ˆé“¾è¡¨ï¼‰ --------------------- */
+/* --------------------- ¶Ë¿Ú½Úµã£¨Á´±í£© --------------------- */
 typedef struct Port {
     char name[64];
     PortDir dir;
@@ -45,7 +45,7 @@ typedef struct Port {
     struct Port* next;
 } Port;
 
-/* --------------------- å˜é‡å£°æ˜ï¼ˆwire/regï¼‰é“¾è¡¨ --------------------- */
+/* --------------------- ±äÁ¿ÉùÃ÷£¨wire/reg£©Á´±í --------------------- */
 typedef struct VarDecl {
     char name[64];
     int is_reg;      // 0: wire, 1: reg
@@ -53,24 +53,24 @@ typedef struct VarDecl {
     struct VarDecl* next;
 } VarDecl;
 
-/* --------------------- assign è¯­å¥é“¾è¡¨ --------------------- */
+/* --------------------- assign Óï¾äÁ´±í --------------------- */
 typedef struct AssignStmt {
-    char lhs[64];     // å·¦ä¾§å˜é‡å
-    Expr* rhs;        // å³ä¾§è¡¨è¾¾å¼æ ‘
+    char lhs[64];     // ×ó²à±äÁ¿Ãû
+    Expr* rhs;        // ÓÒ²à±í´ïÊ½Ê÷
     int line;
     struct AssignStmt* next;
 } AssignStmt;
 
-/* --------------------- é¡¶å±‚æ¨¡å—èŠ‚ç‚¹ --------------------- */
+/* --------------------- ¶¥²ãÄ£¿é½Úµã --------------------- */
 typedef struct Module {
     char name[64];
-    Port* ports;           // ç«¯å£é“¾è¡¨å¤´
-    VarDecl* wires;        // wire/reg å£°æ˜é“¾è¡¨å¤´
-    AssignStmt* assigns;   // assign è¯­å¥é“¾è¡¨å¤´
+    Port* ports;           // ¶Ë¿ÚÁ´±íÍ·
+    VarDecl* wires;        // wire/reg ÉùÃ÷Á´±íÍ·
+    AssignStmt* assigns;   // assign Óï¾äÁ´±íÍ·
     int line;
 } Module;
 
-/* --------------------- å·¥å‚å‡½æ•° --------------------- */
+/* --------------------- ¹¤³§º¯Êı --------------------- */
 Expr* new_expr_id(const char* name, int line);
 Expr* new_expr_number(int value, int line);
 Expr* new_expr_binary(int op, Expr* left, Expr* right, int line);
@@ -81,7 +81,7 @@ VarDecl* new_vardecl(const char* name, int is_reg, int line);
 AssignStmt* new_assign(const char* lhs, Expr* rhs, int line);
 Module* new_module(const char* name, int line);
 
-/* --------------------- å†…å­˜é‡Šæ”¾ --------------------- */
+/* --------------------- ÄÚ´æÊÍ·Å --------------------- */
 void free_expr(Expr* e);
 void free_ports(Port* p);
 void free_vardecls(VarDecl* v);

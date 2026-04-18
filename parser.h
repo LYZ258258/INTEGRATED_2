@@ -6,10 +6,10 @@
 #include "ast.h"
 
 /**
- * ä» Token æ•°ç»„è§£æå‡ºæ¨¡å— ASTã€‚
- * @param tokens Token æ•°ç»„ï¼ˆç”± read_tokens_from_file è¿”å›ï¼‰
- * @param count  Token æ•°é‡
- * @return æˆåŠŸè¿”å› Module*ï¼Œå¤±è´¥è¿”å› NULL
+ * ´Ó Token Êı×é½âÎö³öÄ£¿é AST¡£
+ * @param tokens Token Êı×é£¨ÓÉ read_tokens_from_file ·µ»Ø£©
+ * @param count  Token ÊıÁ¿
+ * @return ³É¹¦·µ»Ø Module*£¬Ê§°Ü·µ»Ø NULL
  */
 Module* parse(const Token* tokens, int count);
 
